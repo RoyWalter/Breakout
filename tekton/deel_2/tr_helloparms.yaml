@@ -1,0 +1,10 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  generateName: helloparms-task-run-
+spec:
+  taskRef:
+    name: helloparms
+  params:
+    - name: what_to_say
+      value: "Goodbye Jenkins"

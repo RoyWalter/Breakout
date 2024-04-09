@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: helloparms
+spec:
+  params:
+    - name: what_to_say
+      type: string
+      default: "Hello World!"
+  steps:
+    - name: say-hello
+      image: docker/whalesay 
+      script: |
+        #!/usr/bin/env sh
+        cowsay $(params.what_to_say)
