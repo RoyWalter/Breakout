@@ -3,8 +3,8 @@
 if [ -n "$1" ]
 then
   echo "Updating assignment: $1"
-  /c/ws/tools/oc apply -f /c/ws/git/tekton-praktijk/Breakout/tekton/deel_4/t_*
-  /c/ws/tools/oc create -f /c/ws/git/tekton-praktijk/Breakout/tekton/deel_4/tr_*
+  /c/ws/tools/oc apply -f /c/ws/git/tekton-praktijk/Breakout/tekton/$1/t_*
+  /c/ws/tools/oc create -f /c/ws/git/tekton-praktijk/Breakout/tekton/$1/tr_*
 else
   echo "No assignment given"
 fi
