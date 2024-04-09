@@ -2,9 +2,19 @@
 
 if [ -n "$1" ]
 then
-  echo "Updating assignment: $1"
-  /c/ws/tools/oc apply -f /c/ws/git/tekton-praktijk/Breakout/tekton/$1/t_*
+  echo -e "Updating assignment: $1"
+  
+  echo -e "\nUpdate Tasks"
+  /c/ws/tools/oc apply $(ls /c/ws/git/tekton-praktijk/Breakout/tekton/$1/t_*.yaml | awk ' { print " -f " $1 } ')
+  
+  echo -e "\nUpdate Pipelines"
+  /c/ws/tools/oc apply -f /c/ws/git/tekton-praktijk/Breakout/tekton/$1/pl_*
+  
+  echo -e "\nUpdate Taskruns"
   /c/ws/tools/oc create -f /c/ws/git/tekton-praktijk/Breakout/tekton/$1/tr_*
+
+  echo -e "\nUpdate Pipelineruns"
+  /c/ws/tools/oc create -f /c/ws/git/tekton-praktijk/Breakout/tekton/$1/plr_*
 else
   echo "No assignment given"
 fi
