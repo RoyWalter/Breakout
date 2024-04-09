@@ -1,0 +1,16 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: python-test-run-
+spec:
+  params:
+    - name: repo-url
+      value: "https://github.com/RoyWalter/Breakout.git"
+    - name: repo-revision
+      value: "main"
+  pipelineRef:
+    name: python-test
+  workspaces:
+    - name: pipeline-space
+      persistentVolumeClaim:
+        claimName: shared-workspace-pvc

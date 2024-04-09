@@ -1,0 +1,31 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: python-test
+spec:
+  params:
+    - name: repo-url
+      type: string
+    - name: repo-revision
+  workspaces:
+    - name: pipeline-space
+  tasks:
+    - name: clone
+      taskRef:
+        name: git-clone
+      params:
+        - name: url
+          value: $(params.repo-url)
+        - name: revision
+          value: $(params.repo-revision) 
+      workspaces:
+        - name: source-code
+          workspace: pipeline-space
+    - name: test
+      runAfter:
+        - clone
+      taskRef:
+        name: python-test
+      workspaces:
+        - name: source-code
+          workspace: pipeline-space

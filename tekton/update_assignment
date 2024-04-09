@@ -4,6 +4,9 @@ if [ -n "$1" ]
 then
   echo -e "Updating assignment: $1"
   
+  echo -e "\n Update Claims"
+  /c/ws/tools/oc apply $(ls /c/ws/git/tekton-praktijk/Breakout/tekton/$1/pvc_*.yaml | awk ' { print " -f " $1 } ')
+
   echo -e "\nUpdate Tasks"
   /c/ws/tools/oc apply $(ls /c/ws/git/tekton-praktijk/Breakout/tekton/$1/t_*.yaml | awk ' { print " -f " $1 } ')
   
